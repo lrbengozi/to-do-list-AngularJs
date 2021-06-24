@@ -15,7 +15,8 @@ angular.module("taskList").factory("tasksAPI", function ($http, config) {
     return $http.post(config.baseUrl + `/api/v1/tasks/finish/${id}`);
   };
 
-  var _reopenTasks = function (id) {
+  var _reopenTasks = function (id, password) {
+    $http.defaults.headers.common.Auth = password;
     return $http.post(config.baseUrl + `/api/v1/tasks/reopen/${id}`);
   };
 

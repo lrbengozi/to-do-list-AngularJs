@@ -5,6 +5,10 @@ angular
     $scope.openTasks = [];
     $scope.closedTasks = [];
 
+    $scope.selectId = function (task) {
+      $scope.selectedId = task.id;
+    };
+
     var listPendingTask = function () {
       tasksAPI
         .getPendingTasks()
@@ -52,15 +56,17 @@ angular
         });
     };
 
-    $scope.reopenTask = function (task) {
+    $scope.reopenTask = function () {
       tasksAPI
-        .reopenTasks(task.id)
+        .reopenTasks($scope.selectedId, $scope.password)
         .success(function (data) {
           listClosedTask();
           listPendingTask();
+          $scope.password = "";
         })
         .error(function (data, status) {
           $scope.message = "Aconteceu um problema: " + data.error;
+          $scope.password = "";
         });
     };
 
