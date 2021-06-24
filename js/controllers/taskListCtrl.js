@@ -44,6 +44,17 @@ angular
         });
     };
 
+    $scope.addRandomTask = function () {
+      tasksAPI
+        .postRandomTasks()
+        .success(function (data) {
+          listPendingTask();
+        })
+        .error(function (data, status) {
+          $scope.message = "Aconteceu um problema: " + data.error;
+        });
+    };
+
     $scope.finishTask = function (task) {
       tasksAPI
         .closeTasks(task.id)

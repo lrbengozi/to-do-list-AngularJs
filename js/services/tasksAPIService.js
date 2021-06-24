@@ -11,6 +11,13 @@ angular.module("taskList").factory("tasksAPI", function ($http, config) {
     return $http.post(config.baseUrl + "/api/v1/tasks", task);
   };
 
+  var _postRandomTasks = function () {
+    return $http.post(config.baseUrl + "/api/v1/tasks/random", {
+      name: "Eu",
+      email: "eu@me.com",
+    });
+  };
+
   var _closeTasks = function (id) {
     return $http.post(config.baseUrl + `/api/v1/tasks/finish/${id}`);
   };
@@ -24,6 +31,7 @@ angular.module("taskList").factory("tasksAPI", function ($http, config) {
     getPendingTasks: _getPendingTasks,
     getClosedTasks: _getClosedTasks,
     postTasks: _postTasks,
+    postRandomTasks: _postRandomTasks,
     closeTasks: _closeTasks,
     reopenTasks: _reopenTasks,
   };
