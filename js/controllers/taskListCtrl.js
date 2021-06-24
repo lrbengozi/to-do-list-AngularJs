@@ -16,7 +16,7 @@ angular
           $scope.openTasks = data;
         })
         .error(function (data, status) {
-          $scope.message = "Aconteceu um problema: " + data.error;
+          $scope.message = "Aconteceu um problema: " + data?.error;
         });
     };
 
@@ -27,7 +27,7 @@ angular
           $scope.closedTasks = data;
         })
         .error(function (data, status) {
-          $scope.message = "Aconteceu um problema: " + data.error;
+          $scope.message = "Aconteceu um problema: " + data?.error;
         });
     };
 
@@ -40,7 +40,7 @@ angular
           listPendingTask();
         })
         .error(function (data, status) {
-          $scope.message = "Aconteceu um problema: " + data.error;
+          $scope.message = "Aconteceu um problema: " + data?.error;
         });
     };
 
@@ -51,7 +51,7 @@ angular
           listPendingTask();
         })
         .error(function (data, status) {
-          $scope.message = "Aconteceu um problema: " + data.error;
+          $scope.message = "Aconteceu um problema: " + data?.error;
         });
     };
 
@@ -63,7 +63,7 @@ angular
           listPendingTask();
         })
         .error(function (data, status) {
-          $scope.message = "Aconteceu um problema: " + data.error;
+          $scope.message = "Aconteceu um problema: " + data?.error;
         });
     };
 
@@ -76,7 +76,7 @@ angular
           $scope.password = "";
         })
         .error(function (data, status) {
-          $scope.message = "Aconteceu um problema: " + data.error;
+          $scope.message = "Aconteceu um problema: " + data?.error;
           $scope.password = "";
         });
     };
