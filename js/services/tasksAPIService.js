@@ -15,10 +15,15 @@ angular.module("taskList").factory("tasksAPI", function ($http, config) {
     return $http.post(config.baseUrl + `/api/v1/tasks/finish/${id}`);
   };
 
+  var _reopenTasks = function (id) {
+    return $http.post(config.baseUrl + `/api/v1/tasks/reopen/${id}`);
+  };
+
   return {
     getPendingTasks: _getPendingTasks,
     getClosedTasks: _getClosedTasks,
     postTasks: _postTasks,
     closeTasks: _closeTasks,
+    reopenTasks: _reopenTasks,
   };
 });

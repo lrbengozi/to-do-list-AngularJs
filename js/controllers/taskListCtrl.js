@@ -41,10 +41,20 @@ angular
     };
 
     $scope.finishTask = function (task) {
-      console.log("Tarefa");
-      console.log(task);
       tasksAPI
         .closeTasks(task.id)
+        .success(function (data) {
+          listClosedTask();
+          listPendingTask();
+        })
+        .error(function (data, status) {
+          $scope.message = "Aconteceu um problema: " + data.error;
+        });
+    };
+
+    $scope.reopenTask = function (task) {
+      tasksAPI
+        .reopenTasks(task.id)
         .success(function (data) {
           listClosedTask();
           listPendingTask();
