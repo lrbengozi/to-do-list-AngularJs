@@ -1,17 +1,29 @@
 angular
   .module("taskList")
   .controller("taskListCtrl", function ($scope, tasksAPI) {
-    $scope.app = "Task List";
-    $scope.tasks = [];
+    $scope.app = "To-Do";
+    $scope.openTasks = [];
+    $scope.closedTasks = [];
 
-    var listTask = function () {
+    var listPendingTask = function () {
       tasksAPI
-        .getTasks()
+        .getPendingTasks()
         .success(function (data) {
-          $scope.tasks = data;
+          $scope.openTasks = data;
         })
         .error(function (data, status) {
-          $scope.message = "Aconteceu um problema: " + data;
+          $scope.message = "Aconteceu um problema: " + data.error;
+        });
+    };
+
+    var listClosedTask = function () {
+      tasksAPI
+        .getClosedTasks()
+        .success(function (data) {
+          $scope.closedTasks = data;
+        })
+        .error(function (data, status) {
+          $scope.message = "Aconteceu um problema: " + data.error;
         });
     };
 
@@ -21,10 +33,24 @@ angular
         .success(function (data) {
           delete $scope.task;
           $scope.taskForm.$setPristine();
-          listTask();
+          listPendingTask();
         })
         .error(function (data, status) {
-          $scope.message = "Aconteceu um problema: " + data;
+          $scope.message = "Aconteceu um problema: " + data.error;
+        });
+    };
+
+    $scope.finishTask = function (task) {
+      console.log("Tarefa");
+      console.log(task);
+      tasksAPI
+        .closeTasks(task.id)
+        .success(function (data) {
+          listClosedTask();
+          listPendingTask();
+        })
+        .error(function (data, status) {
+          $scope.message = "Aconteceu um problema: " + data.error;
         });
     };
 
@@ -33,5 +59,6 @@ angular
       $scope.orderBy = !$scope.orderBy;
     };
 
-    listTask();
+    listPendingTask();
+    listClosedTask();
   });
